@@ -61,37 +61,44 @@ pkg install nodejs git nano -y
 git clone https://github.com/username/repo-bot.git
 cd repo-bot
 npm install
+```
 
-🔑 Edit API Key dari BotFather
+🔑 **Edit API Key dari BotFather**
 
+```bash
 nano config.js
+```
 
 Isi dengan token bot kamu:
 
+```js
 telegram: {
    token: 'masukkan token BotFather', // Token dari BotFather
    adminId: '7693829809' // ID Telegram admin utama
 };
+```
 
 Simpan (CTRL + X → Y → Enter)
 
-🚀 Jalankan Bot
+🚀 **Jalankan Bot**
 
+```bash
 npm start
+```
 
 🎉 Jika berhasil, bot kamu akan online di Telegram!
 
 </details>
+
 ---
 
-📊 Stats & Aktivitas
+## 📊 Stats & Aktivitas
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=rizky-cyber5&show_icons=true&theme=radical&hide_border=true" height="170"/>
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=rizky-cyber5&theme=radical&hide_border=true" height="170"/>
 </p>
+
 ---
 
 🔥 Selalu berkembang untuk masa depan otomasi & AI!
-
----
