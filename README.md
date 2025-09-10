@@ -43,12 +43,32 @@
 
 ```bash
 pkg update && pkg upgrade
-pkg install nodejs git -y
+pkg install nodejs git nano -y
 git clone https://github.com/username/repo-bot.git
 cd repo-bot
 npm install
-npm start 
-## ⚙️ Cara Menjalankan Bot
 
-<details>
-<summary>📱 <b>Termux (Android)</b> – klik untuk lihat tutorial</summary>
+🔑 Ganti API Key BotFather
+
+Sebelum menjalankan bot, edit file config.js untuk ganti API Key dari @BotFather:
+
+nano config.js
+
+Isi dengan token bot kamu, contoh:
+
+
+  telegram: {
+        token: 'masukkan token BotFather', // Token dari BotFather
+        adminId: '7693829809' // ID Telegram admin utama
+};
+
+Simpan dengan cara tekan CTRL + X, lalu Y, dan Enter.
+
+
+---
+
+🚀 Jalankan Bot
+
+npm start
+
+Jika berhasil, bot kamu akan online di Telegram 🎉
