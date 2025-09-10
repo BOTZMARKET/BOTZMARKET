@@ -1,42 +1,56 @@
 ![header](https://files.catbox.moe/ta9ds2.gif)
 
-# 👋 Halo, Aku Rizky (@rizky.cyber5)
+<h1 align="center">👋 Halo, Aku <span style="color:#00F700">Rizky</span> (@rizky.cyber5)</h1>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00F700&center=true&vCenter=true&width=650&lines=💻+Developer+Bot+Telegram;🚀+Fullstack+JS+Enthusiast;🤖+Pembuat+Utility+dan+Toko+Bot;✨+Website+GPT+Developer)](https://git.io/typing-svg)
-
-🔹 Sering memakai **JavaScript (Node.js)**  
-🔹 Fokus pada **otomasi, toko, & utility bot**  
-🔹 Bisa juga membuat **Website berbasis GPT** ✨  
-🔹 📌 Bot Telegram saat ini sudah ada di **versi 4.5**  
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=22&pause=1000&color=00F700&center=true&vCenter=true&width=700&lines=💻+Developer+Bot+Telegram;🚀+Fullstack+JS+Enthusiast;🤖+Pembuat+Utility+%26+Toko+Bot;✨+Website+GPT+Developer" alt="Typing Animation"/>
+</p>
 
 ---
 
-## 📲 Kontak & Sosial Media
-
-[![TikTok](https://img.shields.io/badge/TikTok-@rizky.cyber5-black?logo=tiktok&style=for-the-badge)](https://www.tiktok.com/@rizky.cyber5)  
-[![Chat Admin](https://img.shields.io/badge/Chat%20Admin-WhatsApp-brightgreen?logo=whatsapp&style=for-the-badge)](https://wa.me/6285126274305)  
-[![Join WhatsApp Channel](https://img.shields.io/badge/Join-WhatsApp%20Channel-25D366?logo=whatsapp&style=for-the-badge)](https://whatsapp.com/channel/0029Vb6zk9h7DAWw5iFGoI1N)  
-[![Buat API BotFather](https://img.shields.io/badge/Buat%20API%20BotFather-telegram-blue?logo=telegram&style=for-the-badge)](https://t.me/BotFather)  
-[![Cek API Token](https://img.shields.io/badge/Cek%20API%20Token-online-success?logo=telegram&style=for-the-badge)](https://t.me/BotFather)
+## ⚡ Tentang Aku
+- 🔹 Sering pakai **JavaScript (Node.js)**  
+- 🔹 Fokus di **otomasi, toko, & utility bot**  
+- 🔹 Bisa bikin **Website berbasis GPT** ✨  
+- 🔹 📌 Saat ini bot sudah di **versi 4.5**  
 
 ---
 
-## 🤖 Tentang Botku
+## 🌐 Kontak & Sosial Media  
 
-✨ Dibangun dengan **Node.js** (JavaScript)  
-✨ Stabil, aman, dan mudah digunakan  
-✨ Bisa di-custom sesuai kebutuhan pengguna  
-✨ **BONUS:** Mau coba file bot Telegram gratis? 👉 Chat Admin di WhatsApp  
+<p align="center">
+  <a href="https://www.tiktok.com/@rizky.cyber5">
+    <img src="https://img.shields.io/badge/TikTok-@rizky.cyber5-black?logo=tiktok&style=for-the-badge" />
+  </a>
+  <a href="https://wa.me/6285126274305">
+    <img src="https://img.shields.io/badge/Chat%20Admin-WhatsApp-25D366?logo=whatsapp&style=for-the-badge" />
+  </a>
+  <a href="https://whatsapp.com/channel/0029Vb6zk9h7DAWw5iFGoI1N">
+    <img src="https://img.shields.io/badge/Join-WhatsApp%20Channel-128C7E?logo=whatsapp&style=for-the-badge" />
+  </a>
+  <a href="https://t.me/BotFather">
+    <img src="https://img.shields.io/badge/Buat%20API%20BotFather-telegram-blue?logo=telegram&style=for-the-badge" />
+  </a>
+</p>
 
-⚡ **Kompatibilitas & Multi-Device Support:**  
+---
+
+## 🤖 Tentang Botku  
+
+✨ Dibangun dengan **Node.js**  
+✨ Stabil, aman, dan fleksibel  
+✨ Bisa di-custom sesuai kebutuhan  
+✨ **Bonus:** Mau coba file bot gratis? 👉 Chat Admin di WhatsApp  
+
+### 🔧 Kompatibilitas & Multi-Device  
 - ✅ Support **Node.js v18 & v20**  
-- ✅ Bisa dijalankan di **Panel Pterodactyl**  
-- ✅ Bisa dijalankan di **Termux (Android)**  
-- ✅ Bisa dijalankan di **Linux Server / VPS**  
+- ✅ Jalan di **Panel Pterodactyl**  
+- ✅ Jalan di **Termux (Android)**  
+- ✅ Jalan di **Linux VPS / Server**  
 
 ---
 
-## ⚙️ Cara Menjalankan Bot
+## 🚀 Cara Menjalankan Bot  
 
 <details>
 <summary>📱 <b>Termux (Android)</b> – klik untuk lihat tutorial</summary>
@@ -48,27 +62,36 @@ git clone https://github.com/username/repo-bot.git
 cd repo-bot
 npm install
 
-🔑 Ganti API Key BotFather
-
-Sebelum menjalankan bot, edit file config.js untuk ganti API Key dari @BotFather:
+🔑 Edit API Key dari BotFather
 
 nano config.js
 
-Isi dengan token bot kamu, contoh:
+Isi dengan token bot kamu:
 
-
-  telegram: {
-        token: 'masukkan token BotFather', // Token dari BotFather
-        adminId: '7693829809' // ID Telegram admin utama
+telegram: {
+   token: 'masukkan token BotFather', // Token dari BotFather
+   adminId: '7693829809' // ID Telegram admin utama
 };
 
-Simpan dengan cara tekan CTRL + X, lalu Y, dan Enter.
-
-
----
+Simpan (CTRL + X → Y → Enter)
 
 🚀 Jalankan Bot
 
 npm start
 
-Jika berhasil, bot kamu akan online di Telegram 🎉
+🎉 Jika berhasil, bot kamu akan online di Telegram!
+
+</details>
+---
+
+📊 Stats & Aktivitas
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=rizky-cyber5&show_icons=true&theme=radical&hide_border=true" height="170"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=rizky-cyber5&theme=radical&hide_border=true" height="170"/>
+</p>
+---
+
+🔥 Selalu berkembang untuk masa depan otomasi & AI!
+
+---
