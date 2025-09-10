@@ -47,3 +47,8 @@ pkg install nodejs git -y
 git clone https://github.com/username/repo-bot.git
 cd repo-bot
 npm install
+npm start 
+## ⚙️ Cara Menjalankan Bot
+
+<details>
+<summary>📱 <b>Termux (Android)</b> – klik untuk lihat tutorial</summary>
