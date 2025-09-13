@@ -143,7 +143,9 @@ npm start
 ## 🎥 Video Tutorial
 
 <p align="center">
-  <video src="https://files.catbox.moe/wwtlm5.mp4" width="700" controls></video>
+  <a href="https://files.catbox.moe/wwtlm5.mp4">
+    <img src="https://img.shields.io/badge/Lihat%20Video%20Tutorial-red?logo=youtube&style=for-the-badge" />
+  </a>
 </p>
 
 ---
@@ -151,8 +153,16 @@ npm start
 ## 📊 Stats & Aktivitas
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=rizky-cyber5&show_icons=true&theme=radical&hide_border=true" height="170"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=rizky-cyber5&theme=radical&hide_border=true" height="170"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=rizkycyber5&show_icons=true&theme=radical&hide_border=true" height="170"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=rizkycyber5&theme=radical&hide_border=true" height="170"/>
+</p>
+
+---
+
+## 👀 Visitor Counter
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=rizkycyber5&color=blueviolet&style=for-the-badge" />
 </p>
 
 ---
